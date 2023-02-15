@@ -39,18 +39,18 @@ export default function App() {
         paddingTop: 40,
         display: 'flex',
         flexDirection: "row",
-        alignItems: 'center',
-        // gap: 10
+        alignItems: 'center'
       }}>
-        <Image source={require('./assets/bot-icon.png')} style={{
-          width: 30,
-          height: 30,
-        }} />
-        <Text style={{
-          marginLeft: 5,
-          color: "white",
-          fontWeight: "500"
-        }}>Bot</Text>
+          <Image source={require('./assets/bot-icon.png')} style={{
+            width: 30,
+            height: 30,
+            borderRadius: 1000
+          }} />
+          <Text style={{
+            marginLeft: 5,
+            color: "white",
+            fontWeight: "500"
+          }}>Bot</Text>
       </View>
 
       <ScrollView id="container">
@@ -77,8 +77,8 @@ export default function App() {
 
         <Pressable onPress={sendMessage}>
           <Image source={require('./assets/sendIcon.png')} style={{
-            width: 30,
-            height: 30,
+            width: 24,
+            height: 24,
           }} />
         </Pressable>
       </View>

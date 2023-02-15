@@ -7,8 +7,8 @@ const Container = ({ data, query }) => {
     return (
         <View>
             {data ? data.map(item => <>
-                <Query query={item.message} />
-                <Reply reply={item.reply} />
+                <Query key={item._id} query={item.message} />
+                <Reply key={item.reply} reply={item.reply} />
             </>) : <Text>loading...</Text>}
         </View>
     );
