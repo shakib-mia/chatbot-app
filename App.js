@@ -5,29 +5,26 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 
 import Container from './components/Container/Container';
 
 export default function App() {
-  const [text, onChangeText] = useState('');
   const [query, setQuery] = useState('');
-  const [reply, setReply] = useState('')
+  const [reply, setReply] = useState('');
+  const [message, setMessage] = useState('')
   const [data, setData] = useState('');
-  const pair = []
 
-  // const pair = []
-
-  const sendMessage =  () => {
-
-    fetch(`http://192.168.0.103:4000/query/${text}`)
+  const sendMessage = () => {
+    setMessage(query)
+    fetch(`http://192.168.0.103:4000/query/${query}`)
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data.text);
-      })
+      .then((data) => { })
       .catch(err => console.error(err));
+
+    setQuery('')
   };
 
   useEffect(() => {
     fetch("http://192.168.0.103:4000/messages")
-    .then(res => res.json())
-    .then(data => setData(data))
-  }, []);
+      .then(res => res.json())
+      .then(data => setData(data))
+  }, [data]);
 
 
 
@@ -57,7 +54,7 @@ export default function App() {
       </View>
 
       <ScrollView id="container">
-        <Container data={data} />
+        <Container query={message ? message : query} data={data} />
       </ScrollView>
 
 
@@ -70,8 +67,8 @@ export default function App() {
         alignItems: 'center',
       }}>
         <TextInput
-          value={text}
-          onChangeText={onChangeText}
+          value={query}
+          onChangeText={text => setQuery(text)}
           placeholder="Type Your Message Here"
           style={{
             color: 'white'
