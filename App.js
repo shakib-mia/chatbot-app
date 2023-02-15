@@ -1,31 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import Container from './components/Container/Container';
 
 export default function App() {
+  const [text, onChangeText] = useState('');
+  const [query, setQuery] = useState('');
+  const [reply, setReply] = useState('')
+  const [data, setData] = useState('');
+  const pair = []
 
+  // const pair = []
 
-  // const [isLoading, setLoading] = useState(true);
-  // const [data, setData] = useState("");
+  const sendMessage =  () => {
 
+    fetch(`http://192.168.0.103:4000/query/${text}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.text);
+      })
+      .catch(err => console.error(err));
+  };
 
+  useEffect(() => {
+    fetch("http://192.168.0.103:4000/messages")
+    .then(res => res.json())
+    .then(data => setData(data))
+  }, []);
 
-  // const getMovies = async () => {
-  //   try {
-  //     const response = await fetch('http://localhost:4000/');
-  //     const json = await response.json();
-  //     setData(json);
-  //     console.log(json);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getMovies();
-  // }, []);
 
 
   return (
@@ -45,13 +48,45 @@ export default function App() {
         <Image source={require('./assets/bot-icon.png')} style={{
           width: 30,
           height: 30,
-          borderRadius: "50%"
         }} />
         <Text style={{
           marginLeft: 5,
-          color: "white"
+          color: "white",
+          fontWeight: "500"
         }}>Bot</Text>
       </View>
+
+      <ScrollView id="container">
+        <Container data={data} />
+      </ScrollView>
+
+
+      <View style={{
+        backgroundColor: '#8e44ad',
+        padding: 10,
+        display: 'flex',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: 'center',
+      }}>
+        <TextInput
+          value={text}
+          onChangeText={onChangeText}
+          placeholder="Type Your Message Here"
+          style={{
+            color: 'white'
+          }}
+        />
+
+        <Pressable onPress={sendMessage}>
+          <Image source={require('./assets/sendIcon.png')} style={{
+            width: 30,
+            height: 30,
+          }} />
+        </Pressable>
+      </View>
+
+
       <StatusBar style="auto" />
     </View>
   );

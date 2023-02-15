@@ -4,10 +4,10 @@
     "slug": "ChatbotPhone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bot-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/bot-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
