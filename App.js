@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import Container from './components/Container/Container';
+import { url } from './constants';
 
 export default function App() {
   const [query, setQuery] = useState('');
@@ -12,7 +13,7 @@ export default function App() {
 
   const sendMessage = () => {
     setMessage(query)
-    fetch(`http://192.168.0.103:4000/query/${query}`)
+    fetch(`${url}/query/${query}`)
       .then((response) => response.json())
       .then((data) => {
       })
@@ -22,7 +23,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch("http://192.168.0.103:4000/messages")
+    fetch(`${url}/messages`)
       .then(res => res.json())
       .then(data => setData(data))
   }, [data]);
