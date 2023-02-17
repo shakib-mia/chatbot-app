@@ -14,7 +14,8 @@ export default function App() {
     setMessage(query)
     fetch(`http://192.168.0.103:4000/query/${query}`)
       .then((response) => response.json())
-      .then((data) => { })
+      .then((data) => {
+      })
       .catch(err => console.error(err));
 
     setQuery('')
@@ -41,16 +42,16 @@ export default function App() {
         flexDirection: "row",
         alignItems: 'center'
       }}>
-          <Image source={require('./assets/bot-icon.png')} style={{
-            width: 30,
-            height: 30,
-            borderRadius: 1000
-          }} />
-          <Text style={{
-            marginLeft: 5,
-            color: "white",
-            fontWeight: "500"
-          }}>Bot</Text>
+        <Image source={require('./assets/bot-icon.png')} style={{
+          width: 30,
+          height: 30,
+          borderRadius: 1000
+        }} />
+        <Text style={{
+          marginLeft: 5,
+          color: "white",
+          fontWeight: "500"
+        }}>Bot</Text>
       </View>
 
       <ScrollView id="container">
